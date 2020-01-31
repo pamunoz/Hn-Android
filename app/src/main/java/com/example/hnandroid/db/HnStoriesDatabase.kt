@@ -5,10 +5,10 @@ import androidx.annotation.VisibleForTesting
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.hnandroid.model.HnStory
+import com.example.hnandroid.model.HnStories
 
 @Database(
-    entities = [HnStory::class],
+    entities = [HnStories::class],
     version = HnStoriesDatabaseMigration.latestVersion
 )
 abstract class HnStoriesDatabase : RoomDatabase() {
