@@ -3,8 +3,8 @@ package com.example.hnandroid.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.hnandroid.model.Story.Story.tableName
-import com.example.hnandroid.model.Story.Story.Column
+import com.example.hnandroid.model.HnStory.Story.tableName
+import com.example.hnandroid.model.HnStory.Story.Column
 import com.google.gson.annotations.SerializedName
 
 
@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName
  * fetched from news source.
  */
 @Entity(tableName = tableName)
-data class Story(
+data class HnStory(
     /**
      * Primary key for Room.
      */

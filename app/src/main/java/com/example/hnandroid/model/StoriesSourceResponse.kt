@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class StoriesSourceResponse(
     @SerializedName("hits")
-    val hits: List<Story> = emptyList(),
+    val hits: List<HnStory> = emptyList(),
     @SerializedName("hitsPerPage")
     val hitsPerPage: Int,
     @SerializedName("nbHits")
