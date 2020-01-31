@@ -3,8 +3,8 @@ package com.example.hnandroid.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.hnandroid.model.HnStory.Story.tableName
-import com.example.hnandroid.model.HnStory.Story.Column
+import com.example.hnandroid.model.HnStory.HnStory.tableName
+import com.example.hnandroid.model.HnStory.HnStory.Column
 import com.google.gson.annotations.SerializedName
 
 
@@ -69,7 +69,7 @@ data class HnStory(
     @SerializedName(Column.title)
     val title: String
 ) {
-    object Story {
+    object HnStory {
         const val tableName = "hn_story"
 
         object Column {

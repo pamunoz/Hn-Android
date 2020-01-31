@@ -9,7 +9,7 @@ import com.example.hnandroid.model.HnStory
  * Defines access layer to news stories table
  */
 @Dao
-interface StoryDao {
+interface HnStoryDao {
     /**
      * Insert the story into the table
      */
