@@ -27,16 +27,16 @@ class HnStoriesAdapter(
     /**
      * Bind the view with the data
      */
-    override fun onBindViewHolder(holder: StoriesHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onBindViewHolder(holder: StoriesHolder, position: Int) = holder.bind(hnStories[position], listener)
 
-    override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    /**
+     * Number of items in the list to display
+     */
+    override fun getItemCount() = hnStories.size
 
-
-
+    /**
+     * View Holder Pattern
+     */
     class StoriesHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         /**
