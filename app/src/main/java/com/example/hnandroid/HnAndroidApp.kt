@@ -1,6 +1,7 @@
 package com.example.hnandroid
 
 import android.app.Application
+import com.example.hnandroid.di.base.AppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -13,6 +14,8 @@ class HnAndroidApp : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
+        // Add di
+        AppInjector.init(this)
     }
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
