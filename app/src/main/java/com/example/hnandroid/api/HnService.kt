@@ -1,5 +1,6 @@
 package com.example.hnandroid.api
 
+import com.example.hnandroid.model.StoriesSourceResponse
 import retrofit2.http.GET
 
 /**
