@@ -3,9 +3,11 @@ package com.example.hnandroid.ui.activity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hnandroid.R
+import com.example.hnandroid.adapter.HnStoriesAdapter
 import com.example.hnandroid.ui.base.BaseActivity
 import com.example.hnandroid.ui.viewmodule.HnStoriesViewModel
 import com.example.hnandroid.utils.getViewModel
+import com.example.hnandroid.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -23,5 +25,8 @@ class MainActivity : BaseActivity() {
 
         linearLayoutManager = LinearLayoutManager(this)
         rv_stories.layoutManager = linearLayoutManager
+
+        val hnStoriesAdapter = HnStoriesAdapter { toast("Clicked on Item") }
+        rv_stories.adapter = hnStoriesAdapter
     }
 }
