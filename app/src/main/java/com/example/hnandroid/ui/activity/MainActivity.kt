@@ -1,7 +1,8 @@
-package com.example.hnandroid
+package com.example.hnandroid.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.hnandroid.R
 
 class MainActivity : AppCompatActivity() {
 
