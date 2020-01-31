@@ -15,7 +15,7 @@ abstract class HnStoriesDatabase : RoomDatabase() {
     /**
      * Get news story DAO
      */
-    abstract fun hnStoryDao(): HnStoryDao
+    abstract fun hnStoryDao(): HnStoriesDao
 
     companion object {
         private const val databaseName = "hnstories-db"

@@ -2,7 +2,7 @@ package com.example.hnandroid.di.modules
 
 import android.app.Application
 import com.example.hnandroid.db.HnStoriesDatabase
-import com.example.hnandroid.db.HnStoryDao
+import com.example.hnandroid.db.HnStoriesDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -16,6 +16,6 @@ class HnStoriesDatabaseModule {
 
     @Singleton
     @Provides
-    fun provideHnStoryDao(db: HnStoriesDatabase): HnStoryDao = db.hnStoryDao()
+    fun provideHnStoryDao(db: HnStoriesDatabase): HnStoriesDao = db.hnStoryDao()
 
 }

@@ -1,7 +1,7 @@
 package com.example.hnandroid.repo
 
 import com.example.hnandroid.api.HnService
-import com.example.hnandroid.db.HnStoryDao
+import com.example.hnandroid.db.HnStoriesDao
 import com.example.hnandroid.model.HnStory
 import com.example.hnandroid.model.ViewState
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class HnRepository @Inject constructor(
-    private val hnStoryDao: HnStoryDao,
+    private val hnStoryDao: HnStoriesDao,
     private val hnService: HnService
 ) {
     /**
