@@ -3,8 +3,11 @@ package com.example.hnandroid.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hnandroid.model.HnStoriesAdapterEvent
 
-class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
+class HnStoriesAdapter(
+    private val listener: (HnStoriesAdapterEvent) -> Unit
+): RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
 
 
 
