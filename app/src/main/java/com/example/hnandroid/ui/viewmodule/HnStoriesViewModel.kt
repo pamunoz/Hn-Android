@@ -1,4 +1,4 @@
-package com.example.hnandroid.ui.activity
+package com.example.hnandroid.ui.viewmodule
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
