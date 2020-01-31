@@ -1,7 +1,11 @@
 package com.example.hnandroid.utils
 
+import android.R.color
 import android.content.Context
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +16,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -44,7 +49,12 @@ fun ViewGroup.inflate(layoutRes: Int): View {
 
 fun Context.getDrawableCompat(@DrawableRes resId: Int, @ColorRes tintColorRes: Int = 0) = when {
     tintColorRes != 0 -> AppCompatResources.getDrawable(this, resId)?.apply {
-        setColorFilter(getColorCompat(tintColorRes), PorterDuff.Mode.SRC_ATOP)
+        //setColorFilter(getColorCompat(tintColorRes), PorterDuff.Mode.SRC_ATOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            colorFilter = BlendModeColorFilter(getColorCompat(tintColorRes), BlendMode.SRC_ATOP)
+        } else {
+            setColorFilter(getColorCompat(tintColorRes), PorterDuff.Mode.SRC_ATOP)
+        }
     }
     else -> AppCompatResources.getDrawable(this, resId)
 }!!
