@@ -4,22 +4,12 @@ package com.example.hnandroid.model
 import com.google.gson.annotations.SerializedName
 
 data class StoriesSourceResponse(
-    @SerializedName("exhaustiveNbHits")
-    val exhaustiveNbHits: Boolean,
     @SerializedName("hits")
-    val hits: List<Story>,
+    val hits: List<Story> = emptyList(),
     @SerializedName("hitsPerPage")
     val hitsPerPage: Int,
     @SerializedName("nbHits")
     val nbHits: Int,
-    @SerializedName("nbPages")
-    val nbPages: Int,
-    @SerializedName("page")
-    val page: Int,
-    @SerializedName("params")
-    val params: String,
-    @SerializedName("processingTimeMS")
-    val processingTimeMS: Int,
     @SerializedName("query")
     val query: String
 )

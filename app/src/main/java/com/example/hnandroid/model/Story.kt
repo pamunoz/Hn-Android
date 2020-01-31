@@ -1,38 +1,87 @@
 package com.example.hnandroid.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.hnandroid.model.Story.Story.tableName
+import com.example.hnandroid.model.Story.Story.Column
 import com.google.gson.annotations.SerializedName
 
+
+/**
+ * Hacker news Story Model describing the story details
+ * fetched from news source.
+ */
+@Entity(tableName = tableName)
 data class Story(
-    @SerializedName("author")
+    /**
+     * Primary key for Room.
+     */
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+
+    /**
+     * Name of the author for the story
+     */
+    @ColumnInfo(name = Column.author)
+    @SerializedName(Column.author)
     val author: String,
-    @SerializedName("comment_text")
-    val commentText: String,
-    @SerializedName("created_at")
+    /**
+     * Time of being created as a string
+     */
+    @ColumnInfo(name = Column.created_at)
+    @SerializedName(Column.created_at)
     val createdAt: String,
-    @SerializedName("created_at_i")
+    /**
+     * Time of being created as a integer
+     */
+    @ColumnInfo(name = Column.created_at_milis)
+    @SerializedName(Column.created_at_milis)
     val createdAtI: Int,
-    @SerializedName("_highlightResult")
-    val highlightResult: HighlightResult,
-    @SerializedName("num_comments")
-    val numComments: Int,
-    @SerializedName("objectID")
-    val objectID: String,
-    @SerializedName("parent_id")
-    val parentId: Int,
-    @SerializedName("points")
-    val points: Int,
-    @SerializedName("story_id")
-    val storyId: Int,
-    @SerializedName("story_text")
+//    /**
+//     * The Id of the story
+//     */
+//    @ColumnInfo(name = Column.story_id)
+//    @SerializedName(Column.story_id)
+//    val storyId: Int,
+    /**
+     * The text of the story
+     */
+    @ColumnInfo(name = Column.story_text)
+    @SerializedName(Column.story_text)
     val storyText: String,
-    @SerializedName("story_title")
+    /**
+     * The title of the story
+     */
+    @ColumnInfo(name = Column.story_title)
+    @SerializedName(Column.story_title)
     val storyTitle: String,
-    @SerializedName("story_url")
+    /**
+     * The Url of the story
+     */
+    @ColumnInfo(name = Column.story_url)
+    @SerializedName(Column.story_url)
     val storyUrl: String,
-    @SerializedName("_tags")
-    val tags: List<String>,
-    @SerializedName("title")
-    val title: String,
-    @SerializedName("url")
-    val url: String
-)
+    /**
+     * The title of the story
+     */
+    @ColumnInfo(name = Column.title)
+    @SerializedName(Column.title)
+    val title: String
+) {
+    object Story {
+        const val tableName = "hn_story"
+
+        object Column {
+            const val id = "id"
+            const val author = "author"
+            const val created_at = "created_at"
+            const val created_at_milis = "created_at_i"
+            const val story_text = "story_text"
+            const val story_title = "story_title"
+            const val title = "title"
+            const val story_url = "story_url"
+
+        }
+    }
+}
