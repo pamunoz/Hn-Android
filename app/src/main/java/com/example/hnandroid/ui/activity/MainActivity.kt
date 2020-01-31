@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hnandroid.R
 import com.example.hnandroid.adapter.HnStoriesAdapter
+import com.example.hnandroid.model.ViewState
 import com.example.hnandroid.ui.base.BaseActivity
 import com.example.hnandroid.ui.viewmodule.HnStoriesViewModel
 import com.example.hnandroid.utils.getViewModel
+import com.example.hnandroid.utils.observeNotNull
 import com.example.hnandroid.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,5 +30,14 @@ class MainActivity : BaseActivity() {
 
         val hnStoriesAdapter = HnStoriesAdapter { toast("Clicked on Item") }
         rv_stories.adapter = hnStoriesAdapter
+
+        // Update the UI on stage change
+        hnStoriesViewModel.getHnStories().observeNotNull(this) {state ->
+            when(state) {
+                is ViewState.Success -> hnStoriesAdapter.replaceItems(state.data)
+                is ViewState.Loading -> toast("Loading")
+                is ViewState.Error -> toast("Something went wrong: ${state.message}")
+            }
+        }
     }
 }
