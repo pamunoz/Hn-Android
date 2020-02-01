@@ -25,19 +25,19 @@ data class HnStories(
      */
     @ColumnInfo(name = Column.author)
     @SerializedName(Column.author)
-    val author: String,
+    val author: String?,
     /**
      * Time of being created as a string
      */
     @ColumnInfo(name = Column.created_at)
     @SerializedName(Column.created_at)
-    val createdAt: String,
+    val createdAt: String?,
     /**
      * Time of being created as a integer
      */
     @ColumnInfo(name = Column.created_at_milis)
     @SerializedName(Column.created_at_milis)
-    val createdAtI: Int,
+    val createdAtI: Int = 0,
 //    /**
 //     * The Id of the story
 //     */
@@ -49,25 +49,25 @@ data class HnStories(
      */
     @ColumnInfo(name = Column.story_text)
     @SerializedName(Column.story_text)
-    val storyText: String,
+    val storyText: String?,
     /**
      * The title of the story
      */
     @ColumnInfo(name = Column.story_title)
     @SerializedName(Column.story_title)
-    val storyTitle: String,
+    val storyTitle: String?,
     /**
      * The Url of the story
      */
     @ColumnInfo(name = Column.story_url)
     @SerializedName(Column.story_url)
-    val storyUrl: String,
+    val storyUrl: String?,
     /**
      * The title of the story
      */
     @ColumnInfo(name = Column.title)
     @SerializedName(Column.title)
-    val title: String
+    val title: String?
 ) {
     object HnStories {
         const val tableName = "hn_story"

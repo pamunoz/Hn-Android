@@ -32,6 +32,7 @@ dependencies {
     // Kotlin
     //implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_v"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_v"
+    implementation group: 'androidx.activity', name: 'activity-ktx', version: '1.1.0'
 
     // Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_v"

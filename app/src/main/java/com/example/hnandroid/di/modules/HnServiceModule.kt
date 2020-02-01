@@ -1,11 +1,12 @@
 package com.example.hnandroid.di.modules
 
 import com.example.hnandroid.api.HnService
+import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
+@Module
 class HnServiceModule {
 
     @Singleton
@@ -19,6 +20,6 @@ class HnServiceModule {
     }
 
     companion object {
-        private const val BASE_URL = "http://hn.algolia.com/api/v"
+        private const val BASE_URL = "http://hn.algolia.com/api/v1/"
     }
 }

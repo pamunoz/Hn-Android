@@ -9,7 +9,8 @@ import com.example.hnandroid.model.HnStories
 
 @Database(
     entities = [HnStories::class],
-    version = HnStoriesDatabaseMigration.latestVersion
+    version = 1
+    ,exportSchema = false
 )
 abstract class HnStoriesDatabase : RoomDatabase() {
     /**
@@ -22,7 +23,7 @@ abstract class HnStoriesDatabase : RoomDatabase() {
 
         fun buildDefault(context: Context) =
             Room.databaseBuilder(context, HnStoriesDatabase::class.java, databaseName)
-                .addMigrations(*HnStoriesDatabaseMigration.allMigrations)
+                //.addMigrations(*HnStoriesDatabaseMigration.allMigrations)
                 .build()
 
         @VisibleForTesting

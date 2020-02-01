@@ -1,5 +1,6 @@
 package com.example.hnandroid.adapter
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -42,10 +43,15 @@ class HnStoriesAdapter(
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(hnStory: HnStories, listener: (HnStoriesAdapterEvent) -> Unit) = with(itemView) {
-            tv_story_title.text = hnStory.storyTitle
-            val footText = "${hnStory.author} - ${hnStory.createdAt}"
-            tv_foot.text = footText
+        fun bind(hnStory: HnStories?, listener: (HnStoriesAdapterEvent) -> Unit) = with(itemView) {
+            if (hnStory != null) {
+
+                tv_story_title.text = hnStory.storyTitle
+                val footText = "${hnStory.author} - ${hnStory.createdAt}"
+                tv_foot.text = footText
+            } else {
+                Log.d("ADAPTER", "DATA IS NULL==============>")
+            }
             setOnClickListener { listener(HnStoriesAdapterEvent.ClickEvent) }
         }
     }

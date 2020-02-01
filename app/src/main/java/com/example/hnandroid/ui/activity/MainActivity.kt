@@ -1,6 +1,8 @@
 package com.example.hnandroid.ui.activity
 
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hnandroid.R
 import com.example.hnandroid.adapter.HnStoriesAdapter
@@ -36,7 +38,10 @@ class MainActivity : BaseActivity() {
             when(state) {
                 is ViewState.Success -> hnStoriesAdapter.replaceItems(state.data)
                 is ViewState.Loading -> toast("Loading")
-                is ViewState.Error -> toast("Something went wrong: ${state.message}")
+                is ViewState.Error -> {
+                    toast("Something went wrong: ${state.message}")
+                    Log.e("ANGOLIA:", "${state}")
+                }
             }
         }
     }
