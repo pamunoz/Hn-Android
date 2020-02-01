@@ -3,6 +3,7 @@ package com.example.hnandroid.ui.activity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hnandroid.R
 import com.example.hnandroid.adapter.HnStoriesAdapter
@@ -28,7 +29,11 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         linearLayoutManager = LinearLayoutManager(this)
+        val divider = DividerItemDecoration(this, linearLayoutManager.orientation)
+        rv_stories.addItemDecoration(divider)
         rv_stories.layoutManager = linearLayoutManager
+
+
 
         val hnStoriesAdapter = HnStoriesAdapter { toast("Clicked on Item") }
         rv_stories.adapter = hnStoriesAdapter
