@@ -39,6 +39,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_v"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_v"
 
+    // For formatting time
+    implementation 'com.skybase.humanizer:humanizer:1.0.2'
+
     // Android Support
     implementation "androidx.appcompat:appcompat:$support_v"
     implementation "androidx.recyclerview:recyclerview:$recyclerView_v"

@@ -8,7 +8,11 @@ import com.example.hnandroid.R
 import com.example.hnandroid.model.HnStories
 import com.example.hnandroid.model.HnStoriesAdapterEvent
 import com.example.hnandroid.utils.inflate
+import com.skybase.humanizer.DateHumanizer
 import kotlinx.android.synthetic.main.row_hnstory.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class HnStoriesAdapter(
     private val listener: (HnStoriesAdapterEvent) -> Unit
@@ -44,13 +48,35 @@ class HnStoriesAdapter(
          * Binds the UI with the data and handles clicks
          */
         fun bind(hnStory: HnStories?, listener: (HnStoriesAdapterEvent) -> Unit) = with(itemView) {
-            if (hnStory != null) {
+            hnStory?.let {
+                var simpleTitle = ""
+                if (hnStory.storyTitle != null && hnStory.storyTitle.isNotEmpty()) {
+                    simpleTitle = hnStory.storyTitle
+                } else if(hnStory.title != null && hnStory.title.isNotEmpty()) {
+                    simpleTitle = hnStory.title
+                } else {
+                    simpleTitle = "No Title Found"
+                }
 
-                tv_story_title.text = hnStory.storyTitle
-                val footText = "${hnStory.author} - ${hnStory.createdAt}"
+
+                var simpleDate: String
+
+                tv_story_title.text = simpleTitle
+
+                var dateTime = DateHumanizer.humanize(hnStory.createdAt, DateHumanizer.TYPE_PRETTY_EVERYTHING)
+                simpleDate = when (dateTime) {
+                    "Today" -> {
+                        DateHumanizer.humanize(hnStory.createdAt, DateHumanizer.TYPE_DATE_DISABLE, DateHumanizer.TYPE_TIME_HH_MM)
+                    }
+                    "Yesterday" -> {
+                        DateHumanizer.humanize(hnStory.createdAt, DateHumanizer.TYPE_PRETTY_EVERYTHING)
+                    }
+                    else -> {
+                        DateHumanizer.humanize(hnStory.createdAt)
+                    }
+                }
+                val footText = "${hnStory.author} - $simpleDate"
                 tv_foot.text = footText
-            } else {
-                Log.d("ADAPTER", "DATA IS NULL==============>")
             }
             setOnClickListener { listener(HnStoriesAdapterEvent.ClickEvent) }
         }
