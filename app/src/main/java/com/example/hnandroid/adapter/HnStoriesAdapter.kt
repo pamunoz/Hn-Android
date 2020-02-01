@@ -1,23 +1,18 @@
 package com.example.hnandroid.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hnandroid.R
 import com.example.hnandroid.model.HnStories
-import com.example.hnandroid.model.HnStoriesAdapterEvent
 import com.example.hnandroid.ui.activity.StoryActivity
 import com.example.hnandroid.utils.hnFormatDate
 import com.example.hnandroid.utils.inflate
-import com.skybase.humanizer.DateHumanizer
 import kotlinx.android.synthetic.main.row_hnstory.view.*
 
 
-class HnStoriesAdapter(
-    private val listener: (HnStoriesAdapterEvent) -> Unit
-): RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
+class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
 
     /**
      * List of hacker news tories
@@ -34,11 +29,7 @@ class HnStoriesAdapter(
      * Bind the view with the data
      */
     override fun onBindViewHolder(holder: StoriesHolder, position: Int) {
-
-//        holder.itemView.setOnClickListener {
-//            val intent = Intent(it.context, HnStories)
-//        }
-        holder.bind(hnStories[position], listener)
+        holder.bind(hnStories[position])
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, StoryActivity::class.java)
             intent.putExtra("url", hnStories[position].storyUrl)
@@ -59,7 +50,7 @@ class HnStoriesAdapter(
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(hnStory: HnStories?, listener: (HnStoriesAdapterEvent) -> Unit) = with(itemView) {
+        fun bind(hnStory: HnStories?) = with(itemView) {
             hnStory?.let {
                 var simpleTitle: String = if (hnStory.storyTitle != null && hnStory.storyTitle.isNotEmpty()) {
                     hnStory.storyTitle

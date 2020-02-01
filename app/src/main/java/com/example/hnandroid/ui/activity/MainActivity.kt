@@ -35,7 +35,7 @@ class MainActivity : BaseActivity() {
 
 
 
-        val hnStoriesAdapter = HnStoriesAdapter { toast("Clicked on Item") }
+        val hnStoriesAdapter = HnStoriesAdapter()
         rv_stories.adapter = hnStoriesAdapter
 
         // Update the UI on stage change
