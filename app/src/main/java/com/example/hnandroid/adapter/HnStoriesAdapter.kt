@@ -1,5 +1,6 @@
 package com.example.hnandroid.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hnandroid.R
 import com.example.hnandroid.model.HnStories
 import com.example.hnandroid.model.HnStoriesAdapterEvent
+import com.example.hnandroid.ui.activity.StoryActivity
+import com.example.hnandroid.utils.hnFormatDate
 import com.example.hnandroid.utils.inflate
 import com.skybase.humanizer.DateHumanizer
 import kotlinx.android.synthetic.main.row_hnstory.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class HnStoriesAdapter(
@@ -32,7 +33,18 @@ class HnStoriesAdapter(
     /**
      * Bind the view with the data
      */
-    override fun onBindViewHolder(holder: StoriesHolder, position: Int) = holder.bind(hnStories[position], listener)
+    override fun onBindViewHolder(holder: StoriesHolder, position: Int) {
+
+//        holder.itemView.setOnClickListener {
+//            val intent = Intent(it.context, HnStories)
+//        }
+        holder.bind(hnStories[position], listener)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, StoryActivity::class.java)
+            intent.putExtra("url", hnStories[position].storyUrl)
+            it.context.startActivity(intent)
+        }
+    }
 
     /**
      * Number of items in the list to display
@@ -49,36 +61,18 @@ class HnStoriesAdapter(
          */
         fun bind(hnStory: HnStories?, listener: (HnStoriesAdapterEvent) -> Unit) = with(itemView) {
             hnStory?.let {
-                var simpleTitle = ""
-                if (hnStory.storyTitle != null && hnStory.storyTitle.isNotEmpty()) {
-                    simpleTitle = hnStory.storyTitle
+                var simpleTitle: String = if (hnStory.storyTitle != null && hnStory.storyTitle.isNotEmpty()) {
+                    hnStory.storyTitle
                 } else if(hnStory.title != null && hnStory.title.isNotEmpty()) {
-                    simpleTitle = hnStory.title
+                    hnStory.title
                 } else {
-                    simpleTitle = "No Title Found"
+                    "No Title Found"
                 }
 
-
-                var simpleDate: String
-
+                val footText = "${hnStory.author} - ${hnFormatDate(hnStory.createdAt)}"
                 tv_story_title.text = simpleTitle
-
-                var dateTime = DateHumanizer.humanize(hnStory.createdAt, DateHumanizer.TYPE_PRETTY_EVERYTHING)
-                simpleDate = when (dateTime) {
-                    "Today" -> {
-                        DateHumanizer.humanize(hnStory.createdAt, DateHumanizer.TYPE_DATE_DISABLE, DateHumanizer.TYPE_TIME_HH_MM)
-                    }
-                    "Yesterday" -> {
-                        DateHumanizer.humanize(hnStory.createdAt, DateHumanizer.TYPE_PRETTY_EVERYTHING)
-                    }
-                    else -> {
-                        DateHumanizer.humanize(hnStory.createdAt)
-                    }
-                }
-                val footText = "${hnStory.author} - $simpleDate"
                 tv_foot.text = footText
             }
-            setOnClickListener { listener(HnStoriesAdapterEvent.ClickEvent) }
         }
     }
 
