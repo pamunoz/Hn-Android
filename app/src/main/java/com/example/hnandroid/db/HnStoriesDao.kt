@@ -24,6 +24,6 @@ interface HnStoriesDao {
     suspend fun getStories(): List<HnStories>
 
     @Delete
-    fun delete(story: HnStories)
+    suspend fun delete(story: HnStories)
 
 }

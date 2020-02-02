@@ -16,6 +16,7 @@ import com.example.hnandroid.utils.getViewModel
 import com.example.hnandroid.utils.observeNotNull
 import com.example.hnandroid.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 class MainActivity : BaseActivity() {
@@ -27,6 +28,7 @@ class MainActivity : BaseActivity() {
     /**
      * Starting point of the activity
      */
+    @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -71,8 +73,8 @@ class MainActivity : BaseActivity() {
                     direction: Int
                 ) { //
                     // remove from adapter
-                    viewHolder.adapterPosition
+                    hnStoriesViewModel.deleteStory(hnStoriesAdapter.getHnStoryAt(viewHolder.adapterPosition))
                 }
-            })
+            }).attachToRecyclerView(rv_stories)
     }
 }

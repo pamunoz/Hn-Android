@@ -43,4 +43,8 @@ class HnRepository @Inject constructor(
             emit(ViewState.error(it.message.orEmpty()))
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun delete(story: HnStories) {
+        hnStoryDao.delete(story)
+    }
 }
