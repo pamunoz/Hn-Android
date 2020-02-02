@@ -46,6 +46,10 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
         if (hnStories.isNullOrEmpty()) hnStories.drop(position)
     }
 
+    fun getHnStoryAt(position: Int): HnStories {
+        return hnStories.get(position)
+    }
+
     /**
      * View Holder Pattern
      */

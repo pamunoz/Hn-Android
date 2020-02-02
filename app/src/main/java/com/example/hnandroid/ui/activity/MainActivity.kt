@@ -71,6 +71,7 @@ class MainActivity : BaseActivity() {
                     direction: Int
                 ) { //
                     // remove from adapter
+                    viewHolder.adapterPosition
                 }
             })
     }
