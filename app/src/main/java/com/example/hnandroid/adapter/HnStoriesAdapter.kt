@@ -42,6 +42,10 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
      */
     override fun getItemCount() = hnStories.size
 
+    fun deleteItem(position: Int) {
+        if (hnStories.isNullOrEmpty()) hnStories.drop(position)
+    }
+
     /**
      * View Holder Pattern
      */
