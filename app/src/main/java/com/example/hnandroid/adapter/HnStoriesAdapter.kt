@@ -18,6 +18,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
      * List of hacker news tories
      */
     private var hnStories: List<HnStories> = emptyList()
+    private var deletedStories = mutableListOf<Int>()
 
     /**
      * Inflate the view
@@ -29,7 +30,9 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
      * Bind the view with the data
      */
     override fun onBindViewHolder(holder: StoriesHolder, position: Int) {
-        holder.bind(hnStories[position])
+        if (!deletedStories.contains(hnStories[position].id)) {
+            holder.bind(hnStories[position])
+        }
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, StoryActivity::class.java)
             intent.putExtra("url", hnStories[position].storyUrl)
@@ -43,7 +46,9 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
     override fun getItemCount() = hnStories.size
 
     fun getHnStoryAt(position: Int): HnStories {
-        return hnStories.get(position)
+        deletedStories.add(hnStories[position].id)
+        notifyItemRemoved(position)
+        return hnStories[position]
     }
 
     /**

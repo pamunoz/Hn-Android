@@ -65,7 +65,7 @@ class MainActivity : BaseActivity() {
                     val fromPos = viewHolder.adapterPosition
                     val toPos = target.adapterPosition
                     // move item in `fromPos` to `toPos` in adapter.
-                    return true // true if moved, false otherwise
+                    return false // true if moved, false otherwise
                 }
 
                 override fun onSwiped(
