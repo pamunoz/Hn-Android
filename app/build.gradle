@@ -62,6 +62,7 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_v"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtx_v"
     implementation "androidx.arch.core:core-testing:$coreTesting_v"
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
     // Room
     implementation "androidx.room:room-runtime:$room_v"

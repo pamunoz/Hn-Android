@@ -2,9 +2,11 @@ package com.example.hnandroid.ui.activity
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.hnandroid.R
 import com.example.hnandroid.adapter.HnStoriesAdapter
 import com.example.hnandroid.model.ViewState
@@ -14,6 +16,8 @@ import com.example.hnandroid.utils.getViewModel
 import com.example.hnandroid.utils.observeNotNull
 import com.example.hnandroid.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+
 
 class MainActivity : BaseActivity() {
 
@@ -24,6 +28,7 @@ class MainActivity : BaseActivity() {
     /**
      * Starting point of the activity
      */
+    @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,8 +37,6 @@ class MainActivity : BaseActivity() {
         val divider = DividerItemDecoration(this, linearLayoutManager.orientation)
         rv_stories.addItemDecoration(divider)
         rv_stories.layoutManager = linearLayoutManager
-
-
 
         val hnStoriesAdapter = HnStoriesAdapter()
         rv_stories.adapter = hnStoriesAdapter
@@ -49,5 +52,29 @@ class MainActivity : BaseActivity() {
                 }
             }
         }
+
+        val mIth = ItemTouchHelper(
+            object : ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT  or ItemTouchHelper.RIGHT
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: ViewHolder, target: ViewHolder
+                ): Boolean {
+                    val fromPos = viewHolder.adapterPosition
+                    val toPos = target.adapterPosition
+                    // move item in `fromPos` to `toPos` in adapter.
+                    return false // true if moved, false otherwise
+                }
+
+                override fun onSwiped(
+                    viewHolder: ViewHolder,
+                    direction: Int
+                ) { //
+                    // remove from adapter
+                    hnStoriesViewModel.deleteStory(hnStoriesAdapter.getHnStoryAt(viewHolder.adapterPosition))
+                }
+            }).attachToRecyclerView(rv_stories)
     }
 }

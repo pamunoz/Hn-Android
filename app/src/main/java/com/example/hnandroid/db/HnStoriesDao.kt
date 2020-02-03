@@ -1,6 +1,7 @@
 package com.example.hnandroid.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.hnandroid.model.HnStories
@@ -21,5 +22,8 @@ interface HnStoriesDao {
      */
     @Query("SELECT * FROM hn_story")
     suspend fun getStories(): List<HnStories>
+
+    @Delete
+    suspend fun delete(story: HnStories)
 
 }
