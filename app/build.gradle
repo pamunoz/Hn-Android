@@ -43,6 +43,9 @@ dependencies {
     implementation 'com.skybase.humanizer:humanizer:1.0.2'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.2'
 
+    // pull to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
     // Android Support
     implementation "androidx.appcompat:appcompat:$support_v"
     implementation "androidx.recyclerview:recyclerview:$recyclerView_v"
