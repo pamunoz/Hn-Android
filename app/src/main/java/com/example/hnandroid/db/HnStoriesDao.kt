@@ -21,7 +21,7 @@ interface HnStoriesDao {
      * Get all the stories from table
      */
     @Query("SELECT * FROM hn_story")
-    suspend fun getStories(): List<HnStories>
+    suspend fun getStories(): MutableList<HnStories>
 
     @Delete
     suspend fun delete(story: HnStories)

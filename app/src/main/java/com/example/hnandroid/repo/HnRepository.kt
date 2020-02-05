@@ -27,7 +27,7 @@ class HnRepository @Inject constructor(
      * and persist them in the database
      */
     @ExperimentalCoroutinesApi
-    fun getHnStories(): Flow<ViewState<List<HnStories>>> {
+    fun getHnStories(): Flow<ViewState<MutableList<HnStories>>> {
         return flow {
             // 1. Start with loading + data from database
             emit(ViewState.loading())

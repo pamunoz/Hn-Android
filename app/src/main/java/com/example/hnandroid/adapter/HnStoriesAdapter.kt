@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hnandroid.R
 import com.example.hnandroid.model.HnStories
 import com.example.hnandroid.ui.activity.StoryActivity
 import com.example.hnandroid.utils.hnFormatDate

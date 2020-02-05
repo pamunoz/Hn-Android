@@ -22,13 +22,13 @@ class HnStoriesViewModel @Inject constructor(
 
 
     @ExperimentalCoroutinesApi
-    private val hnStories: LiveData<ViewState<List<HnStories>>> = hnRepository.getHnStories().asLiveData()
+    private val hnStories: LiveData<ViewState<MutableList<HnStories>>> = hnRepository.getHnStories().asLiveData()
 
     /**
      * Return stories to observeNotNull on the UI.
      */
     @ExperimentalCoroutinesApi
-    fun getHnStories(): LiveData<ViewState<List<HnStories>>> = hnStories
+    fun getHnStories(): LiveData<ViewState<MutableList<HnStories>>> = hnStories
 
     fun deleteStory(story: HnStories){
         viewModelScope.launch {
