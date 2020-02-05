@@ -90,7 +90,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
     /**
      * Swap function to set new data on updating
      */
-    fun replaceItems(items: List<HnStories>) {
+    fun replaceItems(items: MutableList<HnStories>) {
         hnStories = items
         notifyDataSetChanged()
     }
