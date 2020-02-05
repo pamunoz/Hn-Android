@@ -32,6 +32,16 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // Setup refresh listener which triggers new data loading
+        swipe_container.setOnRefreshListener {
+
+        }
+
+        // Configure the refreshing colors
+        swipe_container.setColorSchemeResources(android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light)
 
         linearLayoutManager = LinearLayoutManager(this)
         val divider = DividerItemDecoration(this, linearLayoutManager.orientation)
