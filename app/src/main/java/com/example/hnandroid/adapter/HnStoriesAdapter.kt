@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hnandroid.R
 import com.example.hnandroid.model.HnStories
 import com.example.hnandroid.ui.activity.StoryActivity
 import com.example.hnandroid.utils.hnFormatDate
@@ -17,7 +16,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
     /**
      * List of hacker news tories
      */
-    private var hnStories: List<HnStories> = emptyList()
+    private var hnStories: MutableList<HnStories> = mutableListOf()
     private var deletedStories = mutableListOf<Int>()
 
     /**
@@ -49,6 +48,18 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
         deletedStories.add(hnStories[position].id)
         notifyItemRemoved(position)
         return hnStories[position]
+    }
+
+    // Clean all elements of the recycler
+    fun clear() {
+        hnStories.clear()
+        notifyDataSetChanged()
+    }
+
+    // Add a list of items -- change to type used
+    fun addAll(list: Collection<HnStories>) {
+       hnStories.addAll(list)
+        notifyDataSetChanged()
     }
 
     /**
