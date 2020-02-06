@@ -18,7 +18,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
      * List of hacker news tories
      */
     private var hnStories: MutableList<HnStories> = mutableListOf()
-    private var deletedStories = mutableListOf<Int>()
+    private var deletedStories = mutableListOf<String?>()
 
     /**
      * Inflate the view
@@ -30,7 +30,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
      * Bind the view with the data
      */
     override fun onBindViewHolder(holder: StoriesHolder, position: Int) {
-        if (!deletedStories.contains(hnStories[position].id)) {
+        if (!deletedStories.contains(hnStories[position].storyUrl)) {
             holder.bind(hnStories[position])
         }
         holder.itemView.setOnClickListener {
@@ -46,7 +46,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
     override fun getItemCount() = hnStories.size
 
     fun getHnStoryAt(position: Int): HnStories {
-        deletedStories.add(hnStories[position].id)
+        deletedStories.add(hnStories[position].storyUrl)
         notifyItemRemoved(position)
         return hnStories[position]
     }
