@@ -68,8 +68,6 @@ data class HnStories(
     @ColumnInfo(name = Column.title)
     @SerializedName(Column.title)
     val title: String?
-
-
 ) {
     object HnStories {
         const val tableName = "hn_story"
@@ -83,7 +81,6 @@ data class HnStories(
             const val story_title = "story_title"
             const val title = "title"
             const val story_url = "story_url"
-
         }
     }
 }

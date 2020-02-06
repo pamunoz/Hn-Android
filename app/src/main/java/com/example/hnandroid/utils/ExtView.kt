@@ -22,5 +22,3 @@ fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
 }
 
-val Context.preferences: SharedPreferences
-    get() = this.getSharedPreferences("deleted_stories", Context.MODE_PRIVATE)
