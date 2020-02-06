@@ -18,7 +18,6 @@ import com.example.hnandroid.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 class MainActivity : BaseActivity() {
 
     private val hnStoriesViewModel by lazy { getViewModel<HnStoriesViewModel>() }

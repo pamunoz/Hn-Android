@@ -20,7 +20,7 @@ interface HnStoriesDao {
     /**
      * Get all the stories from table
      */
-    @Query("SELECT * FROM hn_story")
+    @Query("SELECT * FROM hn_story ORDER BY created_at_i DESC")
     suspend fun getStories(): MutableList<HnStories>
 
     @Delete
