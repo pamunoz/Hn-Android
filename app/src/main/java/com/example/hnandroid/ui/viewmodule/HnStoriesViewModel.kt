@@ -16,31 +16,26 @@ import javax.inject.Inject
 /**
  * A container for [HnStoies] related data to show on the UI.
  */
-class HnStoriesViewModel @Inject constructor(
-    val hnRepository: HnRepository
-) : ViewModel() {
-
+class HnStoriesViewModel @Inject constructor(private val repo: HnRepository) : ViewModel() {
 
     @ExperimentalCoroutinesApi
-    private val hnStories: LiveData<ViewState<List<HnStories>>> = hnRepository.getHnStories().asLiveData()
+    private val hnStories: LiveData<ViewState<MutableList<HnStories>>> = repo.getHnStories().asLiveData()
 
     /**
      * Return stories to observeNotNull on the UI.
      */
     @ExperimentalCoroutinesApi
-    fun getHnStories(): LiveData<ViewState<List<HnStories>>> = hnStories
+    fun getHnStories(): LiveData<ViewState<MutableList<HnStories>>> = hnStories
 
     fun deleteStory(story: HnStories){
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    hnRepository.delete(story)
+                    repo.delete(story)
                 }
             } catch (e: Exception) {
                 Log.e("ViewModelError", e.message!!)
             }
-
         }
-
     }
 }

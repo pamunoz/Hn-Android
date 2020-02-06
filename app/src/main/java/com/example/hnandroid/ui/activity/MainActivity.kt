@@ -18,13 +18,12 @@ import com.example.hnandroid.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 class MainActivity : BaseActivity() {
 
     private val hnStoriesViewModel by lazy { getViewModel<HnStoriesViewModel>() }
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-
+    val mAdapter = HnStoriesAdapter()
     /**
      * Starting point of the activity
      */
@@ -33,27 +32,52 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Configure the refreshing colors
+        swipe_container.setColorSchemeResources(android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light)
+
         linearLayoutManager = LinearLayoutManager(this)
-        val divider = DividerItemDecoration(this, linearLayoutManager.orientation)
-        rv_stories.addItemDecoration(divider)
-        rv_stories.layoutManager = linearLayoutManager
 
-        val hnStoriesAdapter = HnStoriesAdapter()
-        rv_stories.adapter = hnStoriesAdapter
+        rv_stories.apply {
+            addItemDecoration(DividerItemDecoration(this@MainActivity, linearLayoutManager.orientation))
+            layoutManager = linearLayoutManager
+            adapter = mAdapter
+        }
 
+        loadData(false)
+
+        swipe_container.setOnRefreshListener { loadData(true) }
+
+        setupSwipeToDelete()
+    }
+
+    /**
+     * Setup refresh listener which triggers new data loading
+     */
+    private fun loadData(isReloading: Boolean) {
         // Update the UI on stage change
         hnStoriesViewModel.getHnStories().observeNotNull(this) {state ->
             when(state) {
-                is ViewState.Success -> hnStoriesAdapter.replaceItems(state.data)
-                is ViewState.Loading -> toast("Loading")
+                is ViewState.Success -> {
+                    mAdapter.apply {
+                        if (isReloading) clear()
+                        addAll(state.data)
+                    }
+                    swipe_container.isRefreshing = false
+                }
+                is ViewState.Loading -> swipe_container.isRefreshing = true
                 is ViewState.Error -> {
                     toast("Something went wrong: ${state.message}")
                     Log.e("ANGOLIA:", "${state}")
                 }
             }
         }
+    }
 
-        val mIth = ItemTouchHelper(
+    private fun setupSwipeToDelete() {
+        ItemTouchHelper(
             object : ItemTouchHelper.SimpleCallback(
                 0,
                 ItemTouchHelper.LEFT  or ItemTouchHelper.RIGHT
@@ -73,7 +97,7 @@ class MainActivity : BaseActivity() {
                     direction: Int
                 ) { //
                     // remove from adapter
-                    hnStoriesViewModel.deleteStory(hnStoriesAdapter.getHnStoryAt(viewHolder.adapterPosition))
+                    hnStoriesViewModel.deleteStory(mAdapter.getHnStoryAt(viewHolder.adapterPosition))
                 }
             }).attachToRecyclerView(rv_stories)
     }

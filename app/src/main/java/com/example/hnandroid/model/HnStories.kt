@@ -81,7 +81,6 @@ data class HnStories(
             const val story_title = "story_title"
             const val title = "title"
             const val story_url = "story_url"
-
         }
     }
 }

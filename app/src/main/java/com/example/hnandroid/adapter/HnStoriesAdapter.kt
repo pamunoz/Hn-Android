@@ -17,7 +17,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
     /**
      * List of hacker news tories
      */
-    private var hnStories: List<HnStories> = emptyList()
+    private var hnStories: MutableList<HnStories> = mutableListOf()
     private var deletedStories = mutableListOf<Int>()
 
     /**
@@ -51,6 +51,12 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
         return hnStories[position]
     }
 
+    // Clean all elements of the recycler
+    fun clear() {
+        hnStories.clear()
+        notifyDataSetChanged()
+    }
+
     /**
      * View Holder Pattern
      */
@@ -79,8 +85,8 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
     /**
      * Swap function to set new data on updating
      */
-    fun replaceItems(items: List<HnStories>) {
-        hnStories = items
+    fun addAll(items: MutableList<HnStories>) {
+        hnStories.addAll(items.distinctBy { it.storyUrl })
         notifyDataSetChanged()
     }
 }
