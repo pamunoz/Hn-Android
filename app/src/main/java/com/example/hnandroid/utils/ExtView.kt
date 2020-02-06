@@ -1,5 +1,7 @@
 package com.example.hnandroid.utils
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,3 +21,6 @@ fun FragmentActivity.toast(text: String, duration: Int = Toast.LENGTH_SHORT) {
 fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
 }
+
+val Context.preferences: SharedPreferences
+    get() = this.getSharedPreferences("deleted_stories", Context.MODE_PRIVATE)
