@@ -6,6 +6,9 @@ import com.example.hnandroid.R
 import com.example.hnandroid.utils.toast
 import kotlinx.android.synthetic.main.activity_story.*
 
+/**
+ * This is the [WebView] where the story is shown
+ */
 class StoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

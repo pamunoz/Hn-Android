@@ -57,12 +57,6 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
         notifyDataSetChanged()
     }
 
-    // Add a list of items -- change to type used
-    fun addAll(list: Collection<HnStories>) {
-       hnStories.addAll(list)
-        notifyDataSetChanged()
-    }
-
     /**
      * View Holder Pattern
      */
@@ -91,8 +85,8 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
     /**
      * Swap function to set new data on updating
      */
-    fun replaceItems(items: MutableList<HnStories>) {
-        hnStories = items
+    fun addAll(items: MutableList<HnStories>) {
+        hnStories.addAll(items)
         notifyDataSetChanged()
     }
 }
