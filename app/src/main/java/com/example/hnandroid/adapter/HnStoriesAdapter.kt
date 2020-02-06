@@ -86,7 +86,7 @@ class HnStoriesAdapter: RecyclerView.Adapter<HnStoriesAdapter.StoriesHolder>() {
      * Swap function to set new data on updating
      */
     fun addAll(items: MutableList<HnStories>) {
-        hnStories.addAll(items)
+        hnStories.addAll(items.distinctBy { it.storyUrl })
         notifyDataSetChanged()
     }
 }
